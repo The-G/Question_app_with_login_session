@@ -1,0 +1,24 @@
+<h1>Question#index</h1>
+
+<form action="/question/show">
+    <% if session[:user_id].nil? %>
+        NAME : <input type="text" name="name"/><br>
+    <% else %>
+        <p style="margin:0"><b>name</b></p>
+        <input type="text" name="name" value="<%=User.find(session[:user_id]).name%>"/><br>
+        <input type="radio" id="contactChoice1" name="check_name" value="anonymity">
+          <label for="contactChoice1">anonymity</label>
+        <input type="radio" id="contactChoice2" name="check_name" value="real name" checked>
+          <label for="contactChoice2">name</label>
+        <br>
+    <% end %>
+        <p style="margin:0"><b>QUESTION</b></p>
+        <textarea name="content"></textarea><br>
+    <input type="submit" value="question">
+</form> 
+
+<%@questions.each do |q|%>
+    <h4 style="margin:0px">name: <%= q.name %></h4>
+    <p style="margin:0px">question : <%= q.content %></p>
+    <br>
+<%end%>

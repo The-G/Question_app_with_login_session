@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workspace</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div>  
+    <h1>
+      <a href="/">home</a> / 
+    <% if session[:user_id].nil? %>
+      <a href="/user/sign_up">sign_up</a> / 
+      <a href="/user/login">login</a>
+    <% else %>
+      <a href="/user/logout">logout</a>
+    <% end %>
+    </h1>
+  </div>
+  <div>
+    <% if session[:user_id] %>
+      <%= User.find(session[:user_id]).email %> 님 환영합니다.
+    <% end %>
+  </div>
+
+  <%= yield %>
+
+</body>
+</html>
